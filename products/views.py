@@ -125,11 +125,11 @@ class Allergy_Drink(View):
         return JsonResponse({'results':results}, status=200)
 
     def post(self, request):
-        data = json.loads(request.bodoy)
+        data = json.loads(request.body)
 
         menu = Menu.objects.create(name=data['menu'])
-        category = Category.products.create(
-            name = data['categoroy'],
+        category = Category.objects.create(
+            name = data['category'],
             menu = menu
         )
         drink = Drink.objects.create(
@@ -139,7 +139,7 @@ class Allergy_Drink(View):
             category     = category
         )
         allergy = Allergy.objects.create(name=data['allergy'])
-        allergy_drink = Allergy_Drink.objects.create(
+        allergy_drink = Allergy_drink.objects.create(
             allergy = allergy,
             drink   = drink
         )
